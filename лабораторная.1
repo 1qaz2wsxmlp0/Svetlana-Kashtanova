@@ -1,0 +1,43 @@
+import sys
+
+def dijkstra(graph, start):
+    n = len(graph)
+    dist = [sys.maxsize] * n
+    dist[start] = 0
+    visited = [False] * n
+
+    for _ in range(n):
+        u = min_distance(dist, visited)
+        visited[u] = True
+
+        for v in range(n):
+            if graph[u][v] > 0 and not visited[v]:
+                dist[v] = min(dist[v], dist[u] + graph[u][v])
+
+    return dist
+
+def min_distance(dist, visited):
+    min_dist = sys.maxsize
+    min_index = 0
+    for i in range(len(dist)):
+        if dist[i] < min_dist and not visited[i]:
+            min_dist = dist[i]
+            min_index = i
+    return min_index
+
+graph = [    [0, 4, 0, 0, 0, 0, 0, 8, 0],
+    [4, 0, 8, 0, 0, 0, 0, 11, 0],
+    [0, 8, 0, 7, 0, 4, 0, 0, 2],
+    [0, 0, 7, 0, 9, 14, 0, 0, 0],
+    [0, 0, 0, 9, 0, 10, 0, 0, 0],
+    [0, 0, 4, 14, 10, 0, 2, 0, 0],
+    [0, 0, 0, 0, 0, 2, 0, 1, 6],
+    [8, 11, 0, 0, 0, 0, 1, 0, 7],
+    [0, 0, 2, 0, 0, 0, 6, 7, 0]
+]
+
+start_vertex = 0
+distances = dijkstra(graph, start_vertex)
+
+for i, distance in enumerate(distances):
+    print(f"Расстояние от вершины {start_vertex} до вершины {i} равно {distance}")
