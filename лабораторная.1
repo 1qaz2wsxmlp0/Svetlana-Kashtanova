@@ -1,6 +1,6 @@
 import sys
 
-#Вычисляем кратчайшие расстояние от заданной вершины до всех остальных вершин в графе 
+# Вычисляем кратчайшие расстояние от заданной вершины до всех остальных вершин в графе 
 def dijkstra(graph, start):
     n = len(graph)
     dist = [sys.maxsize] * n
@@ -17,6 +17,7 @@ def dijkstra(graph, start):
 
     return dist
 
+# Находим вершину с минимальным расстоянием, которую не посещали.
 def min_distance(dist, visited):
     min_dist = sys.maxsize
     min_index = 0
@@ -37,7 +38,9 @@ graph = [    [0, 4, 0, 0, 0, 0, 0, 8, 0],
     [0, 0, 2, 0, 0, 0, 6, 7, 0]
 ]
 
+# Определяем стартовую вершину
 start_vertex = 0
+# Вычисляем кратчайшие расстояния с помощью алгоритма Дейкстры
 distances = dijkstra(graph, start_vertex)
 
 for i, distance in enumerate(distances):
